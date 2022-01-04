@@ -1,4 +1,3 @@
-
 name: first
 
 on: push
@@ -8,7 +7,7 @@ jobs:
     name: First Job
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: First action
         uses: actions/checkout@v2
       - name: Second Step
         run: env | sort
@@ -19,4 +18,4 @@ jobs:
       - name: First Step
         uses: actions/checkout@v2
       - name: Second Step
-        uses: "Get-ChildItem Env: | Sort-Object Name"
+        run: "Get-ChildItem Env: | Sort-Object Name"
