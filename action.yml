@@ -1,4 +1,4 @@
-name: Terraform tfdocs ##
+name: Terraform tfdocs ###
 description: Validates a Terraform module
 inputs:
   tfdocs_config_path:
