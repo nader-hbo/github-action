@@ -7,15 +7,10 @@ jobs:
     name: First Job
     runs-on: ubuntu-latest
     steps:
-      - name: First action
-        uses: actions/checkout@v2
-      - name: Second Step
-        run: env | sort
-  job2:
-    name: Second Job
-    runs-on: windows-latest
-    steps:
-      - name: First Step
-        uses: actions/checkout@v2
-      - name: Second Step
-        run: "Get-ChildItem Env: | Sort-Object Name"
+      - name: Setup helmfile
+        uses: mamezou-tech/setup-helmfile@v0.9.0
+        with:
+          helmfile-version: ${{ steps.helm-versions.outputs.helmfile-version }}
+          helm-version: ${{ steps.helm-versions.outputs.helm-version }}
+          helm-diff-plugin-version: b8cb806a293150e64229f6a445f371a4eb8d8f7e # No recent release unfortunately
+          helm-s3-plugin-version: "0.10.0"
