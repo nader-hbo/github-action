@@ -12,5 +12,5 @@ jobs:
         with:
           helmfile-version: ${{ steps.helm-versions.outputs.helmfile-version }}
           helm-version: ${{ steps.helm-versions.outputs.helm-version }}
-          helm-diff-plugin-version: "v3.4.0"
+          helm-diff-plugin-version: "3.4.0"
           helm-s3-plugin-version: "0.10.0"
