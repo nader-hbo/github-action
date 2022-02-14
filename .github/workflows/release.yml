@@ -34,7 +34,8 @@ jobs:
         working-dir: .
         output-file: README.md
         output-method: inject
-        git-push: "true"
+        git-push: "env.tfdocs_git_push"
+        fail-on-diff: "true"
         git-commit-message: "[skip ci] terraform-docs: automated action"
         config-file: "${{ env.tfdocs_config }}"
 
