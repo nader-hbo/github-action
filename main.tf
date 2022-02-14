@@ -8,7 +8,7 @@ variable "subnet_ids" {
   type        = "list"
 }
 
-variable "subnet_ids_test" {
+variable "subnet_ids_2" {
   description = "A list of subnet ids to use"
   type        = "list"
 }
