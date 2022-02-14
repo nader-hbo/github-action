@@ -1,17 +1,12 @@
 name: Release module
 on:
   push:
-    paths-ignore:
-      - "*.md"
-      - ".github/CODEOWNERS"
-      - ".github/METADATA.yaml"
-      - ".github/workflows/**"
     branches:
       - "main"
 
 jobs:
   job1:
-    name: First Job
+    name: Release job
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
