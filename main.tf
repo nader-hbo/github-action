@@ -8,6 +8,11 @@ variable "subnet_ids" {
   type        = "list"
 }
 
+variable "subnet_ids_test" {
+  description = "A list of subnet ids to use"
+  type        = "list"
+}
+
 variable "instance_name" {
   description = "Instance name prefix"
   type        = "string"
