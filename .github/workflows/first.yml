@@ -6,7 +6,7 @@ on:
 
 jobs:
   job1:
-    name: First Job
+    name: Pull Request
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
