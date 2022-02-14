@@ -34,3 +34,14 @@ jobs:
         git-push: "true"
         git-commit-message: "[skip ci] terraform-docs: automated action"
         config-file: "${{ env.tfdocs_config }}"
+
+    - name: Generate semantic version
+      id: generate-version
+      uses: paulhatch/semantic-version@v4.0.2
+      with:
+        format: "${major}.${minor}.${patch}"
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ${{ steps.generate-version.outputs.version_tag }}
+        tag_name: ${{ steps.generate-version.outputs.version_tag }}
