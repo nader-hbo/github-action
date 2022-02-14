@@ -20,11 +20,6 @@ jobs:
       if: steps.tfdocs_config.outputs.files_exists == 'true'
       run: echo "tfdocs_config=.tfdocs-config.yml" >> $GITHUB_ENV
 
-    - name: Set tfdocs git push
-      shell: bash
-      if: github.ref != 'refs/heads/main'
-      run: echo "tfdocs_git_push=true" >> $GITHUB_ENV
-
     - name: Render terraform docs inside the README.md and push changes back to PR branch
       uses: terraform-docs/gh-actions@v0.8.0
       with:
