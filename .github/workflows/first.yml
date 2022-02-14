@@ -7,15 +7,33 @@ jobs:
     name: First Job
     runs-on: ubuntu-latest
     steps:
-      - name: First action
-        uses: actions/checkout@v2
-      - name: Second Step
-        run: env | sort
-  job2:
-    name: Second Job
-    runs-on: windows-latest
-    steps:
-      - name: First Step
-        uses: actions/checkout@v2
-      - name: Second Step
-        run: "Get-ChildItem Env: | Sort-Object Name"
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Check tfdocs-config existence
+      uses: andstor/file-existence-action@v1
+      id: tfdocs_config
+      with:
+        files: ".tfdocs-config.yml"
+
+    - name: set tfdocs config
+      shell: bash
+      if: steps.tfdocs_config.outputs.files_exists == 'true'
+      run: echo "tfdocs_config=.tfdocs-config.yml" >> $GITHUB_ENV
+
+    - name: Set tfdocs git push
+      shell: bash
+      if: github.ref != 'refs/heads/main'
+      run: echo "tfdocs_git_push=true" >> $GITHUB_ENV
+
+    - name: Render terraform docs inside the README.md and push changes back to PR branch
+      uses: terraform-docs/gh-actions@v0.8.0
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: inject
+        git-push: "${{ env.tfdocs_git_push }}"
+        git-commit-message: "[skip ci] terraform-docs: automated action"
+        fail-on-diff: "true"
+        config-file: "${{ env.tfdocs_config }}"
