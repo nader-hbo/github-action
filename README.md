@@ -38,6 +38,7 @@ No modules.
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances to create | `string` | `"1"` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Instance name prefix | `string` | `"test-"` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet ids to use | `list` | n/a | yes |
+| <a name="input_subnet_ids_2"></a> [subnet\_ids\_2](#input\_subnet\_ids\_2) | A list of subnet ids to use | `list` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the vpc | `string` | n/a | yes |
 
 ## Outputs
