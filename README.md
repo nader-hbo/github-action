@@ -8,15 +8,16 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 2.2.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | < 2.32 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 2.0 |
 | <a name="requirement_consul"></a> [consul](#requirement\_consul) | >= 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | < 2.2.0 |
-| <a name="provider_consul"></a> [consul](#provider\_consul) | >= 1.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 2.31.0 |
+| <a name="provider_consul"></a> [consul](#provider\_consul) | 2.14.0 |
 
 ## Modules
 
@@ -38,7 +39,7 @@ No modules.
 | <a name="input_instance_count"></a> [instance\_count](#input\_instance\_count) | Number of instances to create | `string` | `"1"` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Instance name prefix | `string` | `"test-"` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of subnet ids to use | `list` | n/a | yes |
-| <a name="input_subnet_ids_2"></a> [subnet\_ids\_2](#input\_subnet\_ids\_2) | A list of subnet ids to use | `list` | n/a | yes |
+| <a name="input_subnet_ids_test"></a> [subnet\_ids\_test](#input\_subnet\_ids\_test) | A list of subnet ids to use | `list` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The id of the vpc | `string` | n/a | yes |
 
 ## Outputs

@@ -8,7 +8,7 @@ variable "subnet_ids" {
   type        = "list"
 }
 
-variable "subnet_ids_2" {
+variable "subnet_ids_test" {
   description = "A list of subnet ids to use"
   type        = "list"
 }
@@ -44,7 +44,7 @@ output "vpc_id" {
 
 provider "aws" {
   region  = "us-east-1"
-  version = "< 2.2.0"
+  version = "< 2.32"
 }
 
 provider "consul" {
