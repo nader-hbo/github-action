@@ -49,5 +49,5 @@ jobs:
         uses: peter-evans/create-pull-request@v5.0.2
         with:
           commit-message: "chore Update ami to ${{ inputs.new_ami_version }}"
-          branch: "update ami "
+          branch: "update-ami"
           title: "chore Update ami to ${{ inputs.new_ami_version }}"
