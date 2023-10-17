@@ -11,6 +11,13 @@ on:
           - 'o11y'
           - 'tools'
           - 'dp'
+          envs:
+            description: 'environment'
+            required: true
+            type: choice
+            options:
+              - 'dev'
+              - 'int'
       k8s_version:
         description: 'Kubernetes version (e.g., 1.25)'
         required: true
@@ -37,10 +44,11 @@ jobs:
           k8s_version=${{ inputs.k8s_version }}
           new_ami_version=${{ inputs.new_ami_version }}
           cluster_type=${{ inputs.cluster_type }}
+          env=${{ inputs.envs }}
 
           # Update the YAML file
-          jq "."$cluster_type" |= with_entries(select(.key == \"$k8s_version\").value = \"$new_ami_version\")" ami/ami.json > ami/ami_updated.json
-          mv ami/ami_updated.json ami/ami.json
+          jq ".$cluster_type |= with_entries(select(.key == \"$k8s_version\").value = \"$new_ami_version\")" ami/ami-$env.json > ami/ami_updated.json
+          mv ami/ami_updated.json ami/ami-$env.json
         env:
           AMI_KEY: ${{ inputs.k8s_version }}
           NEW_AMI_VERSION: ${{ inputs.new_ami_version }}
