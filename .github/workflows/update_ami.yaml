@@ -11,13 +11,13 @@ on:
           - 'o11y'
           - 'tools'
           - 'dp'
-          envs:
-            description: 'environment'
-            required: true
-            type: choice
-            options:
-              - 'dev'
-              - 'int'
+      envs:
+        description: 'environment'
+        required: true
+        type: choice
+        options:
+          - 'dev'
+          - 'int'
       k8s_version:
         description: 'Kubernetes version (e.g., 1.25)'
         required: true
