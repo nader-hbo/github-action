@@ -1,51 +1,51 @@
-name: Release module
+# name: Release module
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  job1:
-    name: Release job
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
+# jobs:
+#   job1:
+#     name: Release job
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
 
-    - name: Check tfdocs-config existence
-      uses: andstor/file-existence-action@v1
-      id: tfdocs_config
-      with:
-        files: ".tfdocs-config.yml"
+#     - name: Check tfdocs-config existence
+#       uses: andstor/file-existence-action@v1
+#       id: tfdocs_config
+#       with:
+#         files: ".tfdocs-config.yml"
 
-    - name: set tfdocs config
-      shell: bash
-      if: steps.tfdocs_config.outputs.files_exists == 'true'
-      run: echo "tfdocs_config=.tfdocs-config.yml" >> $GITHUB_ENV
+#     - name: set tfdocs config
+#       shell: bash
+#       if: steps.tfdocs_config.outputs.files_exists == 'true'
+#       run: echo "tfdocs_config=.tfdocs-config.yml" >> $GITHUB_ENV
 
-    - name: Set tfdocs git push
-      shell: bash
-      if: github.ref != 'refs/heads/main'
-      run: echo "tfdocs_git_push=true" >> $GITHUB_ENV
+#     - name: Set tfdocs git push
+#       shell: bash
+#       if: github.ref != 'refs/heads/main'
+#       run: echo "tfdocs_git_push=true" >> $GITHUB_ENV
 
-    - name: Render terraform docs inside the README.md and push changes back to PR branch
-      uses: terraform-docs/gh-actions@v0.8.0
-      with:
-        working-dir: .
-        output-file: README.md
-        output-method: inject
-        git-push: "env.tfdocs_git_push"
-        fail-on-diff: "true"
-        git-commit-message: "[skip ci] terraform-docs: automated action"
-        config-file: "${{ env.tfdocs_config }}"
+#     - name: Render terraform docs inside the README.md and push changes back to PR branch
+#       uses: terraform-docs/gh-actions@v0.8.0
+#       with:
+#         working-dir: .
+#         output-file: README.md
+#         output-method: inject
+#         git-push: "env.tfdocs_git_push"
+#         fail-on-diff: "true"
+#         git-commit-message: "[skip ci] terraform-docs: automated action"
+#         config-file: "${{ env.tfdocs_config }}"
 
-    - name: Generate semantic version
-      id: generate-version
-      uses: paulhatch/semantic-version@v4.0.2
-      with:
-        format: "${major}.${minor}.${patch}"
-    - name: Create release
-      uses: softprops/action-gh-release@v1
-      with:
-        name: ${{ steps.generate-version.outputs.version_tag }}
-        tag_name: ${{ steps.generate-version.outputs.version_tag }}
+#     - name: Generate semantic version
+#       id: generate-version
+#       uses: paulhatch/semantic-version@v4.0.2
+#       with:
+#         format: "${major}.${minor}.${patch}"
+#     - name: Create release
+#       uses: softprops/action-gh-release@v1
+#       with:
+#         name: ${{ steps.generate-version.outputs.version_tag }}
+#         tag_name: ${{ steps.generate-version.outputs.version_tag }}

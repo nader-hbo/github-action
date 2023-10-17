@@ -1,0 +1,53 @@
+name: Update AMI workflow
+on:
+  workflow_dispatch:
+    inputs:
+      cluster_type:
+        description: 'Cluster Type'
+        required: true
+        type: choice
+        options:
+          - 'api'
+          - 'o11y'
+          - 'tools'
+          - 'dp'
+      k8s_version:
+        description: 'Kubernetes version (e.g., 1.25)'
+        required: true
+      new_ami_version:
+        description: 'New AMI Version (e.g., dtc-amazon-eks-node-1.25-2023.9.13.1-244)'
+        required: true
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  actions: read
+jobs:
+  update_ami:
+    name: 'Update AMI version'
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update AMI YAML File
+        run: |
+          # Extract inputs
+          k8s_version=${{ inputs.k8s_version }}
+          new_ami_version=${{ inputs.new_ami_version }}
+
+          # Update the YAML file
+          jq ".api |= with_entries(select(.key == \"$k8s_version\").value = \"$new_ami_version\")" ami/ami.json > ami/ami_updated.json
+          mv ami/ami_updated.json ami/ami.json
+        env:
+          AMI_KEY: ${{ inputs.k8s_version }}
+          NEW_AMI_VERSION: ${{ inputs.new_ami_version }}
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          commit-message: "chore Update ami to ${{ inputs.new_ami_version }}"
+          branch: "update ami "
+          title: "chore Update ami to ${{ inputs.new_ami_version }}"
