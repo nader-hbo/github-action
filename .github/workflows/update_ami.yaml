@@ -36,9 +36,10 @@ jobs:
           # Extract inputs
           k8s_version=${{ inputs.k8s_version }}
           new_ami_version=${{ inputs.new_ami_version }}
+          cluster_type=${{ inputs.cluster_type }}
 
           # Update the YAML file
-          jq ".api |= with_entries(select(.key == \"$k8s_version\").value = \"$new_ami_version\")" ami/ami.json > ami/ami_updated.json
+          jq "."$cluster_type" |= with_entries(select(.key == \"$k8s_version\").value = \"$new_ami_version\")" ami/ami.json > ami/ami_updated.json
           mv ami/ami_updated.json ami/ami.json
         env:
           AMI_KEY: ${{ inputs.k8s_version }}
