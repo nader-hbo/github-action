@@ -1,9 +1,8 @@
 {
   "comments": "Custom AMI provided by the security team",
-
   "api": {
     "1.23": "dtc-amazon-eks-node-1.23-2023.8.9.1-239",
-    "1.24": "dtc-amazon-eks-node-1.24-2023.8.9.1-239",
+    "1.24": "dtc-amazon-eks-node-1.25-2023.9.13.1-244",
     "1.25": "dtc-amazon-eks-node-1.25-2023.9.13.1-244"
   },
   "o11y": {
